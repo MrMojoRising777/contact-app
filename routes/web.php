@@ -28,7 +28,7 @@ Route::get('/contacts/create', function () {
 // parameter
 Route::get('/contacts/{id}', function ($id) {
     return "Contact " . $id;
-});
+})->whereNumber('id');  // => format so only numbers are allowed || alternative: ->where('id', '[0-9]+')
 
 // optional parameter (default value)
 Route::get('/companies/{name?}', function ($name = null) {
@@ -37,4 +37,6 @@ Route::get('/companies/{name?}', function ($name = null) {
     } else {
         return "All Companies";
     }
-});
+})->whereAlpha('name'); // => format so only alphabetic characters are allowed || alternative: ->where('name', '[a-zA-Z]+')
+
+// ->whereAlphaNumeric allows both numbers and alphabetic characters
