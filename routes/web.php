@@ -14,29 +14,26 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    // uses dynamic route names
+    $html = "
+        <h1>Contact App</h1>
+        <div>
+            <a href='" . route('contacts.index') . "'>All contacts</a>
+            <a href='" . route('contacts.create') . "'>Add contact</a>
+            <a href='" . route('contacts.show', 1) . "'>Show contact</a>
+        </div>
+    ";
+    return $html;
 });
 
 Route::get('/contacts', function () {
     return "<h1>All contacts</h1>";
-});
+})->name('contacts.index');  // route is named 'contacts.index'
 
 Route::get('/contacts/create', function () {
     return "<h1>Add new contact</h1>";
-});
+})->name('contacts.create'); // route is named 'contacts.create'
 
-// parameter
 Route::get('/contacts/{id}', function ($id) {
     return "Contact " . $id;
-})->whereNumber('id');  // => format so only numbers are allowed || alternative: ->where('id', '[0-9]+')
-
-// optional parameter (default value)
-Route::get('/companies/{name?}', function ($name = null) {
-    if ($name) {
-        return "Company " . $name;
-    } else {
-        return "All Companies";
-    }
-})->whereAlpha('name'); // => format so only alphabetic characters are allowed || alternative: ->where('name', '[a-zA-Z]+')
-
-// ->whereAlphaNumeric allows both numbers and alphabetic characters
+})->name('contacts.show'); // route is named 'contacts.show'
