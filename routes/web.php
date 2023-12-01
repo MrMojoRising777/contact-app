@@ -17,10 +17,24 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('contacts', function () {
+Route::get('/contacts', function () {
     return "<h1>All contacts</h1>";
 });
 
-Route::get('contacts/create', function () {
+Route::get('/contacts/create', function () {
     return "<h1>Add new contact</h1>";
+});
+
+// parameter
+Route::get('/contacts/{id}', function ($id) {
+    return "Contact " . $id;
+});
+
+// optional parameter (default value)
+Route::get('/companies/{name?}', function ($name = null) {
+    if ($name) {
+        return "Company " . $name;
+    } else {
+        return "All Companies";
+    }
 });
