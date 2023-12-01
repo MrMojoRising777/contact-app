@@ -25,8 +25,6 @@ Route::get('/', function () {
     return $html;
 });
 
-// direct route /admin/contacts to contacts.index, /admin/contacts/create to contacts.create, ..
-// ->name('.admin') changes route name from contacts.index to admin.contacts.index, .. 
 Route::prefix('admin')->group( function () {
     Route::get('/contacts', function () {
         return "<h1>All contacts</h1>";
@@ -39,4 +37,9 @@ Route::prefix('admin')->group( function () {
     Route::get('/contacts/{id}', function ($id) {
         return "Contact " . $id;
     })->name('contacts.show');
+});
+
+// if route does not exist, show this route
+Route::fallback(function() {
+    return "<h1>Sorry, the page does not exist</h1>";
 });
