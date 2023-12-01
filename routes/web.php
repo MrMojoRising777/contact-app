@@ -14,7 +14,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    // uses dynamic route names
     $html = "
         <h1>Contact App</h1>
         <div>
@@ -26,14 +25,18 @@ Route::get('/', function () {
     return $html;
 });
 
-Route::get('/contacts', function () {
-    return "<h1>All contacts</h1>";
-})->name('contacts.index');  // route is named 'contacts.index'
-
-Route::get('/contacts/create', function () {
-    return "<h1>Add new contact</h1>";
-})->name('contacts.create'); // route is named 'contacts.create'
-
-Route::get('/contacts/{id}', function ($id) {
-    return "Contact " . $id;
-})->name('contacts.show'); // route is named 'contacts.show'
+// direct route /admin/contacts to contacts.index, /admin/contacts/create to contacts.create, ..
+// ->name('.admin') changes route name from contacts.index to admin.contacts.index, .. 
+Route::prefix('admin')->group( function () {
+    Route::get('/contacts', function () {
+        return "<h1>All contacts</h1>";
+    })->name('contacts.index');
+    
+    Route::get('/contacts/create', function () {
+        return "<h1>Add new contact</h1>";
+    })->name('contacts.create');
+    
+    Route::get('/contacts/{id}', function ($id) {
+        return "Contact " . $id;
+    })->name('contacts.show');
+});
