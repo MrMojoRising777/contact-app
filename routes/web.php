@@ -33,3 +33,11 @@ Route::resources([
 Route::resource('/activities', ActivityController::class)->except([
     'index', 'show' // only allow functions that aren't specified
 ]);
+Route::resource('/contacts.notes', ContactController::class);
+// Route::resource('/activities', ActivityController::class)->names([
+//     'index' => 'activities.all',
+//     'show' => 'activities.view'
+// ]);
+Route::resource('/activities', ActivityController::class)->parameters([
+    'activities' => 'active'
+]);
