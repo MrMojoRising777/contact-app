@@ -31,8 +31,10 @@
                 </thead>
                 <tbody>
                   @forelse ($contacts as $id => $contact)
-                    <tr>
-                      <th scope="row">1</th>
+                    {{-- @continue($id == 1)
+                    @break($id == 3) --}}
+                    <tr @if ($loop->last) class="table-primary" @endif> <!-- loop through array index and take first | last, even, odd -->
+                      <th scope="row">{{ $loop->index }}</th> <!-- loop through array index -->
                       <td>{{ $contact['name'] }}</td>
                       <td>{{ $contact['phone'] }}</td>
                       <td>alfred@test.com</td>
@@ -43,25 +45,25 @@
                         <a href="#" class="btn btn-sm btn-circle btn-outline-danger" title="Delete" onclick="confirm('Are you sure?')"><i class="fa fa-times"></i></a>
                       </td>
                     </tr>
-                  @empty
+                    @empty
                     <p>No contact found</p>
                   @endforelse
-                  </tbody>
-                </table> 
+                </tbody>
+              </table> 
 
-                <nav class="mt-4">
-                  <ul class="pagination justify-content-center">
-                    <li class="page-item disabled">
-                      <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item">
-                      <a class="page-link" href="#">Next</a>
-                    </li>
-                  </ul>
-                </nav>
+              <nav class="mt-4">
+                <ul class="pagination justify-content-center">
+                  <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                  </li>
+                  <li class="page-item"><a class="page-link" href="#">1</a></li>
+                  <li class="page-item"><a class="page-link" href="#">2</a></li>
+                  <li class="page-item"><a class="page-link" href="#">3</a></li>
+                  <li class="page-item">
+                    <a class="page-link" href="#">Next</a>
+                  </li>
+                </ul>
+              </nav>
             </div>
           </div>
         </div>
