@@ -26,8 +26,12 @@ Route::get('/', function () {
 });
 
 Route::get('/contacts', function () {
+    $companies = [
+        1 => ['name' => 'Company One', 'contacts' => 3],
+        2 => ['name' => 'Company Two', 'contacts' => 5],
+    ];
     $contacts = getContacts();
-    return view('contacts.index', compact('contacts')); // alternative to compact(): ['contacts' => $contacts]
+    return view('contacts.index', compact('contacts', 'companies'));
 })->name('contacts.index');
 
 Route::get('/contacts/create', function () {
@@ -36,7 +40,7 @@ Route::get('/contacts/create', function () {
 
 Route::get('/contacts/{id}', function ($id) {
     $contacts = getContacts();
-    abort_if(!isset($contacts[$id]), 404); // if id does not exist in contacts[], give 404 error | alternative: abort_unless($contacts[$id], 404)
+    abort_if(!isset($contacts[$id]), 404);
     $contact = $contacts[$id];
     return view('contacts.show')->with('contact', $contact);
 })->name('contacts.show');
