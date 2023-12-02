@@ -26,7 +26,10 @@ Route::controller(ContactController::class)->name('contacts.')->group(function (
     Route::get('/contacts/{id}', 'show')->name('show');
 });
 Route::resource('/companies', CompanyController::class);
-Route::resource([
+Route::resources([
     '/tags' => TagController::class,
     '/tasks' => TaskController::class
+]);
+Route::resource('/activities', ActivityController::class)->only([
+    'create', 'store', 'edit', 'update', 'destroy' // only allow these functions
 ]);
