@@ -8,21 +8,23 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
+     * 
+     *  !!! This method requires > composer require doctrine/dbal
      */
-    public function up(): void
+    public function up()
     {
         Schema::table('tasks', function (Blueprint $table) {
-            $table->tinyInteger('priority')->default(1)->after('status'); // adds column after column 'status' | alternative: first()
+            $table->renameColumn('due_at', 'due_date');
         });
     }
 
     /**
      * Reverse the migrations.
      */
-    public function down(): void
+    public function down()
     {
         Schema::table('tasks', function (Blueprint $table) {
-            $table->dropColumn('priority');
+            $table->renameColumn('due_date', 'due_at');
         });
     }
 };

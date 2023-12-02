@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('tasks', function (Blueprint $table) {
-            $table->rename('due_at', 'due_date');
+            $table->tinyInteger('priority')->default(1)->after('status');
         });
     }
 
@@ -22,7 +22,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('tasks', function (Blueprint $table) {
-            $table->rename('due_at', 'due_date');
+            $table->dropColumn('priority');
         });
     }
 };
