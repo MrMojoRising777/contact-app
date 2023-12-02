@@ -30,6 +30,6 @@ Route::resources([
     '/tags' => TagController::class,
     '/tasks' => TaskController::class
 ]);
-Route::resource('/activities', ActivityController::class)->only([
-    'create', 'store', 'edit', 'update', 'destroy' // only allow these functions
+Route::resource('/activities', ActivityController::class)->except([
+    'index', 'show' // only allow functions that aren't specified
 ]);
