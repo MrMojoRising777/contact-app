@@ -88,3 +88,15 @@ QUERYING DATABASE W/ ELOQUENT
   * use App\Models\Company
   * Company::all()
   // same queries as Query Builder
+
+MULTIPLE WHERE CLAUSES
+  * Company::where('email', 'mail@company.net')->where('website', 'test.com')->toSql()  // returns SQL query where row is email and website
+
+  * Company::where(['email' => 'mail@company.net', 'website' => 'test.com'])            // alternative query
+  * Company::where('id', '>', 1)->where('id', '<=', 5)                                  // retrieves rows where id between 2 and 5
+  * Company::where('id', '=', 1)->orWhere('id', '=', 5)                                 // retrieves rows where id = 1 or 5
+  * Company::whereNot('id', '=', 5)                                                     // retrieves rows where id != 5
+  * Company::whereIn('id', [1, 2, 3])                                                   // retrieves rows where id = 1, 2 and 3
+  * Company::whereBetween('id', [5, 10])                                                // retrieves rows where id between 5 and 10
+  * Company::whereNull('address')                                                       // retrieves rows 'address' is null
+  * Company::whereDate('created_at', '2023-12-04')                                      // retrieves rows where created_at is 2023-12-04
