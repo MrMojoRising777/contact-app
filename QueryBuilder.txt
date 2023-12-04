@@ -33,35 +33,43 @@ UPDATING ROW
 
 UPDATE IF ROW EXISTS, ELSE INSERT
   * DB::table('users')->updateOrInsert(
-  *  ['email' => 'user2@test.com', 'password' => '12345'],        // checks rows
-  *  ['email_verified_at' => now(), 'name' => 'user 3']           // updates rows
+  *  ['email' => 'user2@test.com', 'password' => '12345'],               // checks rows
+  *  ['email_verified_at' => now(), 'name' => 'user 3']                  // updates rows
   * )
 
 INCREMENT OR DECREMENT
-  * DB::table('tasks')->where('id', 1)->increment('priority')     // increments column 'priority'
-  * DB::table('tasks')->where('id', 1)->increment('priority', 3)  // increments column 'priority' by 3
-  * DB::table('tasks')->where('id', 1)->decrement('priority')     // decrements column 'priority'
+  * DB::table('tasks')->where('id', 1)->increment('priority')            // increments column 'priority'
+  * DB::table('tasks')->where('id', 1)->increment('priority', 3)         // increments column 'priority' by 3
+  * DB::table('tasks')->where('id', 1)->decrement('priority')            // decrements column 'priority'
 
 DELETE ROW
-  * DB::table('tasks')->where('id', 2)->delete()                  // deletes row where 'id' = 2
-  * DB::table('tasks')->delete()                                  // deletes all rows
-  * DB::table('tasks')->truncate()                                // deletes all rows + resets auto_increment id to 0
+  * DB::table('tasks')->where('id', 2)->delete()                         // deletes row where 'id' = 2
+  * DB::table('tasks')->delete()                                         // deletes all rows
+  * DB::table('tasks')->truncate()                                       // deletes all rows + resets auto_increment id to 0
 
-RETRIEVING ROW
-  * DB::table('users')->get()                                     // retrieves all rows from 'users'
+RETRIEVING ALL ROWS
+  * DB::table('users')->get()                                            // retrieves all rows from 'users'
   
-  * $users = DB::table('users')->get()                            // asign all rows from 'users' to variable $users
+  * $users = DB::table('users')->get()                                   // asign all rows from 'users' to variable $users
 
   * foreach ($users as $user) {
   *  echo $user->name . "\n"; 
-  * }                                                             // loop through $users and show name
+  * }                                                                    // loop through $users and show name
 
 DEBUG
   * $users = DB::table('users)->dd()
   * $users = DB::table('users')->dump()
 
 ORDER BY
-  * $users = DB::table('users')->orderBy('name', 'asc')->get()    // retrieves all rows from 'users' ascending | can also be desc OR orderByDesc/orderByAsc
-                                                                  // ->latest()  order by 'created_at' desc or specify latest('email_verified_at')
-                                                                  // ->oldest()  order by 'created_at' asc or specify oldest('email_verified_at')
-                                                                  // ->take(2) limit rows being retrieved to 2 OR ->skip(1) skips 1 row from being retrieved
+  * $users = DB::table('users')->orderBy('name', 'asc')->get()           // retrieves all rows from 'users' ascending | can also be desc OR orderByDesc/orderByAsc
+                                                                         // ->latest()  order by 'created_at' desc or specify latest('email_verified_at')
+                                                                         // ->oldest()  order by 'created_at' asc or specify oldest('email_verified_at')
+                                                                         // ->take(2) limit rows being retrieved to 2 OR ->skip(1) skips 1 row from being retrieved
+
+RETRIEVING SINGLE ROW
+  * $users = DB::table('users)->pluck('name')                            // only retrieves column 'name'
+  * $users = DB::table('users)->pluck('name', 'id')                      // retrieves columns 'name' & 'id'
+
+  * $users = DB::table('users)->find(3)                                  // retrieves row where id = 3
+  * $users = DB::table('users)->where('name', 'user 1')->first()         // retrieves row where 'name' = 'user 1'
+  * $users = DB::table('users)->where('name', 'user 1')->value('name')   // retrieves only column 'name' of row where 'name' = 'user 1'
