@@ -80,4 +80,11 @@ FAKER LIBRARY
  * use Faker\Factory as Faker
  * $faker = Faker::create()
  * $faker->name()                                                         // generates fake name | alternative: email, company, address, domainName, url, slug, ipv4, text, word, etc ..
-                                                                          // check out: fakerphp.github.io 
+                                                                          // check out: fakerphp.github.io
+
+
+QUERYING DATABASE W/ ELOQUENT
+  * terminal > php artisan tinker
+  * use App\Models\Company
+  * Company::all()
+  // same queries as Query Builder
