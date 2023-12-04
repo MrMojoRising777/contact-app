@@ -127,3 +127,14 @@ DELETE
   * $company->delete()
   * Company::destroy(11)                                                                 // deletes row where id = 11
   * Company::destroy([8, 9, 10])                                                         // deletes row where id = 8, 9 & 10
+
+
+MASS ASSIGNMENT (in order to avoid error, add protected $guarded = []; to 'Company Model'  !! $guarded ony allows column that already exist in table)
+  * use App\Models\Company
+  * $data = [
+  *  "name" => "Company 3",
+  *  "email" => "Email company 3",
+  *  "address" => "Address company 3",
+  *  "website" => "Website company 3",
+  * ]
+  * Company::create($data)
