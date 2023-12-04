@@ -138,3 +138,60 @@ MASS ASSIGNMENT (in order to avoid error, add protected $guarded = []; to 'Compa
   *  "website" => "Website company 3",
   * ]
   * Company::create($data)
+
+INSERTING OR UPDATING METHOD
+
+<?php
+
+// 1
+
+// $company = Company::where('email', "company1@test.com")->first();
+
+// if (! $company) {
+//   $company = new Company();
+//   $company->email = "company1@test.com";
+//   $company->name = "Company 1";
+// }
+
+// simplified
+$company = Company::firstOrNew(
+  ['email', "company1@test.com"],
+  ['name', "Company 1"]
+);
+$company->save();
+
+
+// 2
+
+// $company = Company::where('email', "company2@test.com")->first();
+
+// if (! $company) {
+//   $company = new Company();
+//   $company->email = "company2@test.com";
+//   $company->name = "Company 2";
+// }
+
+// simplified
+Company::firstOrCreat(
+  ['email' => "company2@test.com"],
+  ['name' => "Company 2"]
+);
+
+// 3
+
+// $company = Company::where('email', "company3@test.com")->first();
+
+// if ($company) {
+//   $company->update(["name" => "Company 2"]);
+// } else {
+//   $company = Company::create([
+//     "email" => "company3@test.com",
+//     "name" => "Company 3"
+//   ]);
+// }
+
+// simplified
+Company::updateOrCreate(
+  ['email' => "company3@test.com"],
+  ["name" => "Company 3"]
+);
