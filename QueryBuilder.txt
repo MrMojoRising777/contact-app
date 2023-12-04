@@ -24,4 +24,25 @@ INSERT MULTIPLE AT ONCE |inserts into variable $userId
   *    'name' => 'task 3',
   *    'user_id' => '$userId'
   *  ]
-  *]) 
+  * ])
+
+UPDATING ROW
+  * DB::table('users')->where('user_id', '1')->update([
+  *  'email_verified_at' => now()
+  * ])
+
+UPDATE IF ROW EXISTS, ELSE INSERT
+  * DB::table('users')->updateOrInsert(
+  *  ['email' => 'user2@test.com', 'password' => '12345'],        // checks rows
+  *  ['email_verified_at' => now(), 'name' => 'user 3']           // updates rows
+  * )
+
+INCREMENT OR DECREMENT
+  * DB::table('tasks')->where('id', 1)->increment('priority')     // increments column 'priority'
+  * DB::table('tasks')->where('id', 1)->increment('priority', 3)  // increments column 'priority' by 3
+  * DB::table('tasks')->where('id', 1)->decrement('priority')     // decrements column 'priority'
+
+DELETE ROW
+  * DB::table('tasks')->where('id', 2)->delete()                  // deletes row where 'id' = 2
+  * DB::table('tasks')->delete()                                  // deletes all rows
+  * DB::table('tasks')->truncate()                                // deletes all rows + resets auto_increment id to 0
