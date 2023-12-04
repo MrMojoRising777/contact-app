@@ -73,3 +73,11 @@ RETRIEVING SINGLE ROW
   * $users = DB::table('users)->find(3)                                  // retrieves row where id = 3
   * $users = DB::table('users)->where('name', 'user 1')->first()         // retrieves row where 'name' = 'user 1'
   * $users = DB::table('users)->where('name', 'user 1')->value('name')   // retrieves only column 'name' of row where 'name' = 'user 1'
+
+
+FAKER LIBRARY
+ * terminal > php artisan tinker
+ * use Faker\Factory as Faker
+ * $faker = Faker::create()
+ * $faker->name()                                                         // generates fake name | alternative: email, company, address, domainName, url, slug, ipv4, text, word, etc ..
+                                                                          // check out: fakerphp.github.io 
