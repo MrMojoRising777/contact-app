@@ -1,0 +1,27 @@
+INSERTING DATA INTO DB USING TINKER  |each line = enter in ternminal
+  * terminal > php artisan tinker
+  * use illuminate\Support\Facades\DB
+  * DB::table('table_name)->insert([
+  *   'name' => 'user',
+  *   'email' => 'user@test.com',
+  *   'password' => '1234'
+  * ])
+
+INSERT & GET ID + ASSIGN TO VARIABLE
+  * $userId = DB::table('table_name)->insertGetId([
+  *   'name' => 'user 2',
+  *   'email' => 'email@google.net',
+  *   'password' => 'notPassword'
+  * ])
+
+INSERT MULTIPLE AT ONCE |inserts into variable $userId
+  * DB::table('tasks)->insert([
+  *  [
+  *    'name' => 'task 2',
+  *    'user_id' => '$userId'
+  *  ],
+  *  [
+  *    'name' => 'task 3',
+  *    'user_id' => '$userId'
+  *  ]
+  *]) 
