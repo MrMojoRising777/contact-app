@@ -46,3 +46,22 @@ DELETE ROW
   * DB::table('tasks')->where('id', 2)->delete()                  // deletes row where 'id' = 2
   * DB::table('tasks')->delete()                                  // deletes all rows
   * DB::table('tasks')->truncate()                                // deletes all rows + resets auto_increment id to 0
+
+RETRIEVING ROW
+  * DB::table('users')->get()                                     // retrieves all rows from 'users'
+  
+  * $users = DB::table('users')->get()                            // asign all rows from 'users' to variable $users
+
+  * foreach ($users as $user) {
+  *  echo $user->name . "\n"; 
+  * }                                                             // loop through $users and show name
+
+DEBUG
+  * $users = DB::table('users)->dd()
+  * $users = DB::table('users')->dump()
+
+ORDER BY
+  * $users = DB::table('users')->orderBy('name', 'asc')->get()    // retrieves all rows from 'users' ascending | can also be desc OR orderByDesc/orderByAsc
+                                                                  // ->latest()  order by 'created_at' desc or specify latest('email_verified_at')
+                                                                  // ->oldest()  order by 'created_at' asc or specify oldest('email_verified_at')
+                                                                  // ->take(2) limit rows being retrieved to 2 OR ->skip(1) skips 1 row from being retrieved
