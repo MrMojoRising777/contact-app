@@ -1,0 +1,9 @@
+php artisan tinker
+use App\Models\Contact
+Contact::factory()->make()      // generates dummy data without adding to DB
+Contact::factory(2)->make()     // generates 2
+Contact::factory()->create()    // adds data to DB
+Contact::factory()->create([     // overwrites default values
+  'first_name' => 'John',
+  'last_name' => 'Doe'
+])
