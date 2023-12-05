@@ -30,16 +30,16 @@
                   </tr>
                 </thead>
                 <tbody> <!-- if child view requires variables that are available in parent view, use forelse -->
-                  {{-- @forelse ($contacts as $id => $contact)
-                    @include('contacts._contact', ['contact' => $contact])
+                  @forelse ($contacts as $index => $contact)
+                    @include('contacts._contact', ['contact' => $contact, 'index' => $index])
                     @empty
-                    <p>No contact found</p>
-                  @endforelse --}}
-                  @each('contacts._contact', $contacts, 'contact', 'contacts._empty') <!-- render '_contact' for each 'contact' in $contacts, IF empty show '_empty' -->
+                    @include('contacts._empty')
+                  @endforelse
+                  {{-- @each('contacts._contact', $contacts, 'contact', 'contacts._empty') <!-- render '_contact' for each 'contact' in $contacts, IF empty show '_empty' --> --}}
                 </tbody>
               </table> 
 
-              {{ $contacts->links() }}
+              {{ $contacts->withQueryString()->links() }}  <!--current method allows all queries in browser, to specify which queries are allowed > appends(request()->only('orderBy', 'q')) -->
             </div>
           </div>
         </div>
