@@ -7,3 +7,11 @@ Contact::factory()->create([     // overwrites default values
   'first_name' => 'John',
   'last_name' => 'Doe'
 ])
+
+FACTORY STATES
+
+php artisan tinker
+use App\Models\Task
+Task::factory()->completed()->create()               // creates a Task instance w/ function completed (TaskFactory.php)
+Task::factory()->tomorrow()->create()                // creates a Task instance w/ function tomorrow (TaskFactory.php)
+Task::factory()->tomorrow()->priority()->create()    // creates a Task instance w/ function tomorrow & priority (TaskFactory.php)
