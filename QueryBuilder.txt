@@ -203,3 +203,9 @@ User::upsert([
   ['name' => 'User 2', 'email' => 'user2@test.com', 'password' => '456'],
   ['name' => 'User 3', 'email' => 'user3@test.com', 'password' => '789'],
 ], ['email'], ['name', 'password'])
+
+INSERTING RELATED MODELS
+* use App\Models\Company
+* use App\Models\Contact
+* $company = Company::first()
+* $company->contacts()
