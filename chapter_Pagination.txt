@@ -13,3 +13,8 @@ $contacts->links()->render()             // generate the html code for paginatio
 $contacts->toJson()                      // convert to JSON
 $contacts->firstItem()                   // get first item of variable $contacts
 Contact::simplePaginate()
+
+GENERATE FILES TO EDIT PAGINATION STYLE
+
+php artisan vendor:publish
+14 (laravel-pagination)
