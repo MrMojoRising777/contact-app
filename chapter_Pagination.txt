@@ -1,0 +1,15 @@
+php artisan tinker
+use Illuminate\Support\Facades\DB
+use App\Models\Contact
+DB::table('contacts')->paginate(10)      // by default 15/page, now 10/page
+Contact::paginate(10)                    // same as above
+$contacts = Contact::paginate(10)        // assigned to variable
+$contacts->count()                       // how many contacts are inside variable $contacts (after pagination)
+$contacts->total()                       // how many contacts in total (in total, without pagination)
+Contact::count()                         // same as above
+$contacts->items()                       // returns items for current page (10 items/page)
+$contacts->links()                       // generate pagination links to navigate
+$contacts->links()->render()             // generate the html code for pagination links to navigate
+$contacts->toJson()                      // convert to JSON
+$contacts->firstItem()                   // get first item of variable $contacts
+Contact::simplePaginate()
