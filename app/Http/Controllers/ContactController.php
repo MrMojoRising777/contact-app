@@ -44,7 +44,9 @@ class ContactController extends Controller
             'address' => 'nullable',
             'company_id' => 'required|exists:companies,id'
         ]);
-        dd($request->path());
+        Contact::create($request->all());
+
+        return redirect()->route('contacts.index')->with('message', 'Conact has been added successfully');
     }
 
     public function show($id) 
