@@ -25,6 +25,8 @@ Route::controller(ContactController::class)->name('contacts.')->group(function (
     Route::post('/contacts', 'store')->name('store');
     Route::get('/contacts/create', 'create')->name('create');
     Route::get('/contacts/{id}', 'show')->name('show');
+    Route::get('/contacts/{id}/edit', 'edit')->name('edit');
+    Route::put('/contacts/{id}', 'update')->name('update');
 });
 Route::resource('/companies', CompanyController::class);
 Route::resources([
