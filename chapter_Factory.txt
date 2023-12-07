@@ -15,3 +15,24 @@ use App\Models\Task
 Task::factory()->completed()->create()               // creates a Task instance w/ function completed (TaskFactory.php)
 Task::factory()->tomorrow()->create()                // creates a Task instance w/ function tomorrow (TaskFactory.php)
 Task::factory()->tomorrow()->priority()->create()    // creates a Task instance w/ function tomorrow & priority (TaskFactory.php)
+
+FACTORY SEQUENCES
+
+use Illuminate\Database\Eloquent\Factories\Sequence
+Task::factory(3)->state(new Sequence(
+  ['priority' => 1],
+  ['priority' => 2],
+  ['priority' => 3],
+))->create()                                    // creates a 3 Task instances, one with priority 1, 2 and 3
+
+Task::factory(3)->sequence(
+  ['priority' => 1],
+  ['priority' => 2],
+  ['priority' => 3],
+)->create()                                   // same as above but simplified
+
+Task::factory(3)->sequence(
+  ['priority' => 1],
+  ['priority' => 2],
+  ['priority' => 3],
+)tomorrow()->create()                         // same as above but aded function tomorrow (TaskFactory.php)
