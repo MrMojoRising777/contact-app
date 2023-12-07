@@ -33,9 +33,18 @@ class ContactController extends Controller
         return view('contacts.create', compact('companies'));
     }
 
-    public function store()
+    public function store(Request $request)
     {
-        dd('Store');
+        $request->validate([
+            'first_name' => 'required|string|max:50',
+            // 'first_name'=> ['required', 'string', 'max:50']  same as above
+            'last_name' => 'required|string|max:50',
+            'email' => 'required|email',
+            'phone' => 'nullable',
+            'address' => 'nullable',
+            'company_id' => 'required|exists:companies,id'
+        ]);
+        dd($request->path());
     }
 
     public function show($id) 
