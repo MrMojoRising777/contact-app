@@ -19,18 +19,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', WelcomeController::class);
-
-// Route::controller(ContactController::class)->name('contacts.')->group(function () {
-//     Route::get('/contacts', 'index')->name('index');
-//     Route::post('/contacts', 'store')->name('store');
-//     Route::get('/contacts/create', 'create')->name('create');
-//     Route::get('/contacts/{id}', 'show')->name('show');
-//     Route::get('/contacts/{id}/edit', 'edit')->name('edit');
-//     Route::put('/contacts/{id}', 'update')->name('update');
-//     Route::delete('/contacts/{id}', 'destroy')->name('destroy');
-// });
 // can be replaced by:
 Route::resource('/contacts', ContactController::class);
+Route::delete('/contacts/{contact}/restore', [ContactController::class, 'restore'])->name('contacts.restore');
+Route::delete('/contacts/{contact}/force-delete', [ContactController::class, 'forceDelete'])->name('contacts.force-delete');
+
 
 Route::resource('/companies', CompanyController::class);
 Route::resources([
