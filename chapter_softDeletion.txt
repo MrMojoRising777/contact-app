@@ -1,0 +1,8 @@
+php artisan tinker
+use App\Models\Company
+[$cp1, $cp2] = Company::find([1, 2])    // get company w/ id 1 and 2, assign to variable $cp1 and $cp2
+$cp1                                    // see variable $cp1
+$cp1->delete()                          // does not delete company from db table BUT column deleted_at fills & Company::count() returns 9 instead of 10
+$cp1->trashed()                         // check if softDeleted
+$cp1->restore()                         // restore softDeleted company
+$cp1->forceDelete()                     // completely delete company from db table
