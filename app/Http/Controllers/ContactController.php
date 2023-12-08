@@ -97,7 +97,8 @@ class ContactController extends Controller
     {
         $contact = Contact::findOrFail($id);
         $contact->delete();
-        return redirect()->route('contacts.index')
+        $redirect = request()->query('redirect');
+        return ($redirect ? redirect()->route($redirect) : back())
             ->with('message', 'Contact has been moved to trash')
             ->with('undoRoute', route('contacts.restore', $contact->id));
     }

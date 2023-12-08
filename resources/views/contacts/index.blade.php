@@ -41,17 +41,19 @@
                     <th scope="col">Actions</th>
                   </tr>
                 </thead>
-                <tbody> <!-- if child view requires variables that are available in parent view, use forelse -->
+                <tbody>
+                  @php
+                      $showTrashButtons = request()->query('trash') ? true : false
+                  @endphp
                   @forelse ($contacts as $index => $contact)
                     @include('contacts._contact', ['contact' => $contact, 'index' => $index])
                     @empty
                     @include('contacts._empty')
                   @endforelse
-                  {{-- @each('contacts._contact', $contacts, 'contact', 'contacts._empty') <!-- render '_contact' for each 'contact' in $contacts, IF empty show '_empty' --> --}}
                 </tbody>
               </table> 
 
-              {{ $contacts->withQueryString()->links() }}  <!--current method allows all queries in browser, to specify which queries are allowed > appends(request()->only('orderBy', 'q')) -->
+              {{ $contacts->withQueryString()->links() }}
             </div>
           </div>
         </div>
