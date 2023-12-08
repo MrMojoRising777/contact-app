@@ -31,8 +31,7 @@ class ContactController extends Controller
                 $query->orWhere("last_name", "LIKE", "%{$search}%");
                 $query->orWhere("email", "LIKE", "%{$search}%");
             }
-        })
-        ->paginate(10);
+        })->paginate(10);
         // dump(DB::getQueryLog());                 // for debugging
         return view('contacts.index', compact('contacts', 'companies'));
     }
