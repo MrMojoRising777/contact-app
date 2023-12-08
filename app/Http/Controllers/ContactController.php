@@ -21,7 +21,11 @@ class ContactController extends Controller
     {
         $companies = $this->company->pluck();
         // DB::enableQueryLog();                    // enable query debugging
-        $contacts = Contact::latest()->where(function ($query) {
+        $query = Contact::query();
+        if (request()->query('trash')) {
+            $query->onlyTrashed();
+        }
+        $contacts = $query->latest()->where(function ($query) {
             if ($companyId = request()->query("company_id")) {
                 $query->where("company_id", $companyId);
             }
