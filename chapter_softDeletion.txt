@@ -6,3 +6,13 @@ $cp1->delete()                          // does not delete company from db table
 $cp1->trashed()                         // check if softDeleted
 $cp1->restore()                         // restore softDeleted company
 $cp1->forceDelete()                     // completely delete company from db table
+
+$cp3 = Company::find(3)                 // assign to variable
+$cp3->delete()                          // soft delete company variable
+Company::find(3)                        // returns null now
+Company::count()                        // returns count w/ exception of softDeleted companies
+Company::withTrashed()->count()         // returns count w/ softDeleted companies
+Company::withTrashed()->find(3)         // returns softDeleted item
+Company::get()                          // get companies w/ exception of softDeleted
+Company::withTrashed()->get()           // get companies w/ softDeleted
+Company::onlyTrashed()->get()           // get softDeleted companies
