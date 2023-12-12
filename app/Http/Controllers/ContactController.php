@@ -23,7 +23,7 @@ class ContactController extends Controller
         // DB::enableQueryLog();                    // enable query debugging
         
         $contacts = Contact::allowedTrash()
-            ->allowedSorts(['first_name', 'last_name', 'email'])
+            ->allowedSorts(['first_name', 'last_name', 'email'], "-id")
             ->AllowedFilters('company_id')
             ->allowedSearch('first_name', 'last_name', 'email')
             ->paginate(10);
