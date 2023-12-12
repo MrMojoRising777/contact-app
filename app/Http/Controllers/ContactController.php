@@ -21,13 +21,11 @@ class ContactController extends Controller
     {
         $companies = $this->company->pluck();
         // DB::enableQueryLog();                    // enable query debugging
-        $query = Contact::query();
-        if (request()->query('trash')) {
-            $query->onlyTrashed();
-        }
-        $contacts = $query->allowedSorts('last_name')
+        
+        $contacts = Contact::allowedTrash()
+            ->allowedSorts('first_name')
             ->AllowedFilters('company_id')
-            ->allowedSearch(['first_name', 'last_name', 'email'])
+            ->allowedSearch('first_name', 'last_name', 'email')
             ->paginate(10);
         // dump(DB::getQueryLog());                 // for debugging
         return view('contacts.index', compact('contacts', 'companies'));
