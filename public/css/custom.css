@@ -2,7 +2,6 @@ body {
 	font-family: 'Varela Round', sans-serif;
 	background-color: #f7f7f7;
 }
-
 .navbar {
 	background: #fff;
 	-moz-box-shadow: rgba(0, 0, 0, 0.09) 0 2px 0;
@@ -10,22 +9,18 @@ body {
 	box-shadow: rgba(0, 0, 0, 0.09) 0 2px 0;
 	padding: 10px 16px;
 }
-
 .navbar .navbar-brand {
 	font-weight: bold;
 	letter-spacing: -1px;
 	font-size: 20px;
 	color: #dd5638;
 }
-
 .navbar-light .navbar-nav .active>.nav-link {
     color: #435d7d;
 }
-
 .fileinput {
 	text-align: center;
 }
-
 .btn-circle {
   width: 30px;
   height: 30px;
@@ -35,26 +30,21 @@ body {
   line-height: 1.428571429;
   border-radius: 15px;
 }
-
 ul.pagination {
 	margin-bottom: 0;
 }
-
 .card-title {
     color: #fff;
     background: #435d7d;
     padding: 16px 20px;
 }
-
 .footer {
 	background-color: #435d7d; 
 	color: #f7f7f7;
 }
-
 .footer a {
 	color: #d9d9d9;
 }
-
 th a { 
 	display: block;
 	width: 100%;
@@ -94,4 +84,18 @@ a.sortable:after {
 a.sortable.desc:after {
 	border-top-color: #848484;
 	margin-top: 1px;
+}
+.auth-wrapper {
+	min-height: 92vh;
+}
+.auth-wrapper h1 {
+	font-size: 1.5em;
+	font-weight: 700;
+	color: #6c757d;
+	letter-spacing: 1px;
+	text-align: center;
+	text-transform: uppercase;
+}
+.auth-wrapper .form-label {
+	color: #6c757d;
 }
