@@ -16,4 +16,24 @@ class SimpleSoftDeletingScope implements Scope
         // only retrieves rows where 'deleted_at' = null when Contact::count() is called
         $builder->whereNull('deleted_at');
     }
+
+    public function extend(Builder $builder)
+    {
+        $this->addWithTrashed($builder);
+        $this->addOnlyTrashed($builder);
+    }
+
+    public function addWithTrashed(Builder $builder)
+    {
+        $builder->macro('withTrashed', function(Builder $builder) {
+            return $builder->withoutGlobalScope($this);
+        });
+    }
+
+    public function addOnlyTrashed(Builder $builder)
+    {
+        $builder->macro('onlyTrashed', function(Builder $builder) {
+            return $builder->withoutGlobalScope($this)->whereNotNull('deleted_at');
+        });
+    }
 }
