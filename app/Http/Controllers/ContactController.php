@@ -90,9 +90,8 @@ class ContactController extends Controller
             ->with('undoRoute', $this->getUndoRoute('contacts.restore', $contact));
     }
 
-    public function restore($id) 
+    public function restore(Contact $contact) 
     {
-        $contact = Contact::onlyTrashed()->findOrFail($id);
         $contact->restore();
         return back()
             ->with('message', 'Contact has been restored from trash')
@@ -104,9 +103,8 @@ class ContactController extends Controller
         return request()->missing('undo') ? route($name, [$resource->id, 'undo' => true]) : null;
     }
 
-    public function forceDelete($id) 
+    public function forceDelete(Contact $contact) 
     {
-        $contact = Contact::onlyTrashed()->findOrFail($id);
         $contact->forceDelete();
         return back()
             ->with('message', 'Contact has been removed permanently');
