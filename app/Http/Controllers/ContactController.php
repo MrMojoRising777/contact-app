@@ -25,13 +25,10 @@ class ContactController extends Controller
         if (request()->query('trash')) {
             $query->onlyTrashed();
         }
-        $contacts = $query->sortByNameAlpha()->filterByCompany()->where(function ($query) {
-            if ($search = request()->query('search')) {
-                $query->where("first_name", "LIKE", "%{$search}%");
-                $query->orWhere("last_name", "LIKE", "%{$search}%");
-                $query->orWhere("email", "LIKE", "%{$search}%");
-            }
-        })->paginate(10);
+        $contacts = $query->allowedSorts('last_name')
+            ->AllowedFilters('company_id')
+            ->allowedSearch(['first_name', 'last_name', 'email'])
+            ->paginate(10);
         // dump(DB::getQueryLog());                 // for debugging
         return view('contacts.index', compact('contacts', 'companies'));
     }
