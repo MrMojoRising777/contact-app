@@ -1,0 +1,7 @@
+php artisan tinker
+use App\Models\Contact
+use App\Models\Scopes\SimpleSoftDeletingScope
+Contact::withoutGlobalScope(SimpleSoftDeletingScope::class)->count()    // retrievs rows, without using scopes
+Contact::withGlobalScopes([                                             // allows multiple scopes to be specified
+  SimpleSoftDeletingScope::class
+])->count()
