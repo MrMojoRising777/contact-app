@@ -11,6 +11,8 @@ class ContactRequest extends FormRequest
      */
     public function authorize(): bool
     {
+        // dd($this->route('contact'));   // returns debugging data
+        // dd($this->method());           // returns type of request (POST, PUT, DELETE, GET, ...)
         return true;
     }
 
