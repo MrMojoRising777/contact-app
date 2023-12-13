@@ -8,6 +8,7 @@ use App\Repositories\CompanyRepository;
 use Illuminate\Http\Request;
 use App\Models\Contact;
 use Illuminate\Support\Facades\DB;
+// use Illuminate\Support\Facades\Auth;
 
 class ContactController extends Controller
 {
@@ -20,6 +21,13 @@ class ContactController extends Controller
 
     public function index()
     {
+        // dd(Auth::user());
+        // if (Auth::check()) {
+        //     dd('sign in');
+        // } else {
+        //     dd('guest');
+        // }
+
         $companies = $this->company->pluck();
         // DB::enableQueryLog();                    // enable query debugging
         
