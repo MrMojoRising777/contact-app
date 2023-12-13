@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', WelcomeController::class);  
-Route::middleware(['auth'])->group(function () { // OPTION 2: IMPLEMENT AUTH MIDDLEWARE IN ROUTE (also possible as: Route::get('/dashboard', DashboardController::class)->middleware(['auth']);)
+Route::middleware(['auth', 'verified'])->group(function () { // OPTION 2: IMPLEMENT AUTH MIDDLEWARE IN ROUTE (also possible as: Route::get('/dashboard', DashboardController::class)->middleware(['auth']);)
     Route::get('/dashboard', DashboardController::class);
     Route::resource('/contacts', ContactController::class);
     Route::delete('/contacts/{contact}/restore', [ContactController::class, 'restore'])->name('contacts.restore')->withTrashed();
