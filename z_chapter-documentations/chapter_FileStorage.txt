@@ -13,3 +13,8 @@ Storage::missing("myFile.txt")                          // returns true if file 
 Storage::disk('local')->exists("myFile.txt")            // specify disk
 Storage::size("myFile.txt")                             // get size in bytes
 Storage::lastModified("myFile.txt")                     // shows last modification date
+
+STORING FILES
+Storage::put('myFile.txt', 'Testing..')                 // (location, content) if file exists, update content. If file does not exist, create file
+Storage::prepend('myFile.txt', 'Testing..')             // writes to beginning of file
+Storage::append('myFile.txt', 'Testing..')              // writes to end of file
