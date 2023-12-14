@@ -49,3 +49,7 @@ Route::middleware(['auth', 'verified'])->group(function () { // OPTION 2: IMPLEM
         'activities' => 'active'
     ]);
 }); 
+
+Route::get('/download', function() {
+    return Storage::download('PNG.png', 'custom-file-name.png');
+});

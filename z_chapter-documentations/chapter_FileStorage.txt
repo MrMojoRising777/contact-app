@@ -1,3 +1,15 @@
 change .env file: FILESYSTEM_DISK=local to public
 
 >php artisan storage:link
+
+READING FILES
+>php artisan tinker
+use Illuminate\Support\Facades\Storage
+Storage::get("myFile.txt")                              // retrieves file content (readable if plain text)
+Storage::url("PNG.png")                                 // returns file url
+Storage::path("PNG.png")                                // returns file path
+Storage::exists("myFile.txt")                           // returns true if file exists
+Storage::missing("myFile.txt")                          // returns true if file does NOT exists
+Storage::disk('local')->exists("myFile.txt")            // specify disk
+Storage::size("myFile.txt")                             // get size in bytes
+Storage::lastModified("myFile.txt")                     // shows last modification date
