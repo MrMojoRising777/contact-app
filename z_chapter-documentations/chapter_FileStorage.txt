@@ -23,3 +23,11 @@ COPYING, MOVING and DELETING FILES
 Storage::copy('PNG.png', 'images/PNG.png')              // copies file path to file path (if folder does not exist, creates new folder)
 Storage::move('PNG.png', 'images/PNG.png')              // moves file path to file path (if folder does not exist, creates new folder)
 Storage::delete('images/PNG.png')                       // deletes file path
+
+WORKING W/ DIRECTORIES
+Storage::files('images')                                // returns array of files inside 'images'(does NOT include sub folders) 
+Storage::allFiles('images')                             // returns array of files inside 'images'(including sub folders)
+Storage::makeDirectory('images/sm')                     // creates new folder inside 'images'
+Storage::directories('images')                          // returns array of folders inside 'images' (does NOT include sub folders)
+Storage::allDirectories('images')                       // returns array of folders inside 'images' (including sub folders)
+Storage::deleteDirectory('images/sm')                   // deletes folder
