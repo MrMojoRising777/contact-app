@@ -57,7 +57,7 @@
                       <label for="bio">Profile picture</label>
                       <div class="fileinput fileinput-new" data-provides="fileinput">
                         <div class="fileinput-new img-thumbnail" style="width: 150px; height: 150px;">
-                          <img src="{{ $user->profilePictureUrl() }}" alt="...">    <!--GET http://localhost/storage/profile/profile-user-1.png 404 (Not Found)-->
+                          <img src="{{ url('/storage/' .$user->profile_picture)}}" alt="...">    <!--SOLVED but not using {{ $user->profilePictureUrl() }}-->
                         </div>
                         <div class="fileinput-preview fileinput-exists img-thumbnail"
                           style="max-width: 150px; max-height: 150px;"></div>
