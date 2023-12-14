@@ -18,3 +18,8 @@ STORING FILES
 Storage::put('myFile.txt', 'Testing..')                 // (location, content) if file exists, update content. If file does not exist, create file
 Storage::prepend('myFile.txt', 'Testing..')             // writes to beginning of file
 Storage::append('myFile.txt', 'Testing..')              // writes to end of file
+
+COPYING, MOVING and DELETING FILES
+Storage::copy('PNG.png', 'images/PNG.png')              // copies file path to file path (if folder does not exist, creates new folder)
+Storage::move('PNG.png', 'images/PNG.png')              // moves file path to file path (if folder does not exist, creates new folder)
+Storage::delete('images/PNG.png')                       // deletes file path
