@@ -1,0 +1,3 @@
+change .env file: FILESYSTEM_DISK=local to public
+
+>php artisan storage:link
