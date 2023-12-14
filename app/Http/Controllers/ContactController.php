@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ContactRequest;
 use Illuminate\Pagination\LengthAwarePaginator;
-use App\Repositories\CompanyRepository;
 use Illuminate\Http\Request;
 use App\Models\Contact;
+use App\Models\Company;
 use Illuminate\Support\Facades\DB;
 // use Illuminate\Support\Facades\Auth;
 
@@ -14,9 +14,9 @@ class ContactController extends Controller
 {
     protected $company;
 
-    public function __construct(CompanyRepository $company)
+    public function usercompanies()
     {
-        $this->company = $company;
+        return Company::forUser(auth()->user())->orderBy('name')->pluck('name', 'id');
     }
 
     public function index()
@@ -28,13 +28,14 @@ class ContactController extends Controller
         //     dd('guest');
         // }
 
-        $companies = $this->company->pluck();
+        $companies = $this->userCompanies();
         // DB::enableQueryLog();                    // enable query debugging
         
         $contacts = Contact::allowedTrash()
             ->allowedSorts(['first_name', 'last_name', 'email'], "-id")
             ->AllowedFilters('company_id')
             ->allowedSearch('first_name', 'last_name', 'email')
+            ->forUser(auth()->user())
             ->paginate(10);
         // dump(DB::getQueryLog());                 // for debugging
         return view('contacts.index', compact('contacts', 'companies'));
@@ -42,14 +43,14 @@ class ContactController extends Controller
 
     public function create() 
     {
-        $companies = $this->company->pluck();
+        $companies = $this->userCompanies();
         $contact = new Contact();
         return view('contacts.create', compact('companies', 'contact'));
     }
 
     public function store(ContactRequest $request)
     {
-        Contact::create($request->all());
+        $request->user()->contacts()->create($request->all());
 
         return redirect()->route('contacts.index')->with('message', 'Contact has been added successfully');
     }
@@ -61,7 +62,7 @@ class ContactController extends Controller
 
     public function edit(Contact $contact) 
     {
-        $companies = $this->company->pluck();
+        $companies = $this->userCompanies();
         return view('contacts.edit', compact('companies', 'contact'));
     }
 
