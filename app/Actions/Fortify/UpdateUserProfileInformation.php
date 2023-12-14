@@ -48,20 +48,24 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
                 'company' => $input['company'],
                 'country' => $input['country'],
                 'address' => $input['address'],
+                'profile_picture' => $input['profile_picture'],
             ])->save();
         }
     }
 
     protected function uploadProfilePicture(&$input)
     {
-        if(request()->hasFile('profile_picture')) {
-            // OPTION 1
-            // $fileName = Storage::putFile('profile', $input['profile_picture']);
-            // $input['profile-picture'] = $fileName;
-            // OPTION 2
+        if (request()->hasFile('profile_picture')) {
             $uploadedFile = $input['profile_picture'];
-            $fileName = $uploadedFile->store('profile');
-            $input['profile-picture'] = $fileName;
+
+            $fileName = $uploadedFile->storeAs(
+                'profile',
+                'profile-user-' . request()->user()->id .
+                    '.' .
+                    $uploadedFile->getClientOriginalExtension()
+            );
+            // dd($fileName);  > profile/profile-user-1.png SAVED IN DB
+            $input['profile_picture'] = $fileName;
         }
     }
 
@@ -79,6 +83,7 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
             'company' => $input['company'],
             'country' => $input['country'],
             'address' => $input['address'],
+            'profile_picture' => $input['profile_picture'],
             'email_verified_at' => null,
         ])->save();
 
