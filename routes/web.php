@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\User;
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\ContactController;
@@ -49,4 +50,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 Route::get('/download', function() {
     return Storage::download('PNG.png', 'custom-file-name.png');
+});
+
+Route::get('/eagerload-multiple', function() {
+    $users = User::with(['companies', 'contacts'])->get();
+
+    foreach($users as $user) {
+        echo $user->name . ": ";
+        echo $user->companies->count() . " companies, " . $user->contacts->count() . " contacts<br>";
+    }
 });
