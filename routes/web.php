@@ -101,3 +101,15 @@ Route::get('/eagerload-lazy', function() {
         echo "</br />";
     }
 });
+
+Route::get('/eagerload-default', function() {
+    $users = User::without('contacts')->get();
+
+    foreach ($users as $user) {
+        echo $user->name . "<br />";
+        // foreach ($user->companies as $company) {
+        //     echo $company->email . "<br />";
+        // }
+        echo "</br />";
+    }
+});
