@@ -3,7 +3,7 @@
   <td>{{ $contact->first_name }}</td>
   <td>{{ $contact->last_name }}</td>
   <td>{{ $contact->email }}</td>
-  <td>{{ $contact->company->name }}</td>
+  <td>{{ $contact->company->name }}</td>  <!--OPTION 1: add ->withTrashed() to Model || OPTION 2: optional($contact->company)->name-->
   <td width="150">
     @if($showTrashButtons)
       @include('shared.buttons.restore', [
