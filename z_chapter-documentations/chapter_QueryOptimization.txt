@@ -1,0 +1,17 @@
+DEBUG OPTION 1
+
+> php artisan tinker
+use Iluuminate\Support\Facades\DB
+DB::listen(fn ($query) => dump($query->sql, $query->bindings, $query->time))
+use App\Models\Contact
+Contact::latest()->whereCompanyId(1)->get()
+
+Implement Log in AppServiceProvider
+Delete lne form .env  > LOG_DEPRECATIONS_CHANNEL=null
+Log visible in storage\logs\laravel.log
+
+
+DEBUG OPTION 2 (https://github.com/barryvdh/laravel-debugbar)
+
+exit from tinker
+> composer require barryvdh/laravel-debugbar --dev
