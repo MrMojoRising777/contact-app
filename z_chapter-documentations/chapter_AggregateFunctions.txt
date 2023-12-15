@@ -1,0 +1,7 @@
+> php artisan tinker
+use Illuminate\Support\Facades\DB
+use App\Models\Contact
+Contact::withMin('tasks', 'priority')->first()                 // returns Contact instance w/ 'tasks_min_priority' = 1
+Contact::withMax('tasks', 'priority')->first()                 // returns Contact instance w/ 'tasks_max_priority' = 3
+Contact::withMax('tasks as max_tasks', 'priority')->first()    // same as above but named 'max_tasks' = 3
+Contact::withSum('tasks', 'priority')->first()                 // returns Contact instance w/ 'tasks_max_priority' = 6  (1 + 2 + 3)
