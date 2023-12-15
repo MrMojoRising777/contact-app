@@ -28,13 +28,13 @@
         <!-- /.navbar-header -->
         <div class="collapse navbar-collapse" id="navbar-toggler">
           <ul class="navbar-nav">
-            @auth <!-- same as if (Auth::check()) -->
-              <li class="nav-item"><a href="#" class="nav-link">Companies</a></li>
-              <li class="nav-item active"><a href="#" class="nav-link">Contacts</a></li>
+            @auth
+              <li class="nav-item @if(request()->is('companies*')) active @endif"><a href="{{ route('companies.index') }}" class="nav-link">Companies</a></li>
+              <li class="nav-item @if(request()->is('contacts*')) active @endif"><a href="{{ route('contacts.index') }}" class="nav-link">Contacts</a></li>
             @endauth
           </ul>
           <ul class="navbar-nav ml-auto">
-            @guest  <!-- same as if (!Auth::check()) -->
+            @guest
               <li class="nav-item mr-2"><a href="{{ route('login') }}" class="btn btn-outline-secondary">Login</a></li>
               <li class="nav-item"><a href="{{ route('register') }}" class="btn btn-outline-primary">Register</a></li>
             @else
