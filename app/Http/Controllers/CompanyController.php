@@ -78,7 +78,7 @@ class CompanyController extends Controller
         $redirect = request()->query('redirect');
         return ($redirect ? redirect()->route($redirect) : back())
             ->with('message', 'Company has been moved to trash.')
-            ->with('undoRoute', getUndoRoute('companies.destroy', $company));
+            ->with('undoRoute', getUndoRoute('companies.restore', $company));
     }
 
     public function restore(Company $company)
@@ -86,7 +86,7 @@ class CompanyController extends Controller
         $company->restore();
         return back()
             ->with('message', 'Company has been restored from trash.')
-            ->with('undoRoute', getUndoRoute('companies.restore', $company));
+            ->with('undoRoute', getUndoRoute('companies.destroy', $company));
     }
 
     public function forceDelete(Company $company)
