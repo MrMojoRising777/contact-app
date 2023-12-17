@@ -12,6 +12,7 @@ use App\Http\Controllers\TagController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +30,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', DashboardController::class);
     Route::get('/settings/profile-information', ProfileController::class)->name('user-profile-information.edit');
     Route::get('/settings/password', PasswordController::class)->name('user-password.edit');
+    Route::get('/sample-contacts', function (){
+        return response()->download(Storage::path('contacts-sample.csv'));
+    })->name('sample-contacts');
     Route::get('/contacts/import', [ImportContactcontroller::class, 'create'])->name('contacts.import.create');
     Route::post('/contacts/import', [ImportContactcontroller::class, 'store'])->name('contacts.import.store');
     Route::resource('/contacts', ContactController::class);

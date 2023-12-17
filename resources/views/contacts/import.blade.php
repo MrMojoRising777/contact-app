@@ -25,7 +25,7 @@
                             @error('csv')
                               <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
-                          <a class="form-text" href="#">Download sample CSV</a>
+                          <a class="form-text" href="{{ route('sample-contacts') }}">Download sample CSV</a>
                         </div>
                       </div>
                     </div>
@@ -60,3 +60,12 @@
     </div>
   </main>
 @endsection
+
+@push('scripts')
+  <script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.min.js"></script>
+  <script>
+      $(document).ready(function () {
+        bsCustomFileInput.init()
+      })
+  </script>
+@endpush
