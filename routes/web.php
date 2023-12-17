@@ -5,6 +5,7 @@ use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ExportContactcontroller;
 use App\Http\Controllers\ImportContactcontroller;
 use App\Http\Controllers\Settings\PasswordController;
 use App\Http\Controllers\Settings\ProfileController;
@@ -35,6 +36,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('sample-contacts');
     Route::get('/contacts/import', [ImportContactcontroller::class, 'create'])->name('contacts.import.create');
     Route::post('/contacts/import', [ImportContactcontroller::class, 'store'])->name('contacts.import.store');
+    Route::get('/contacts/export', [ExportContactcontroller::class, 'create'])->name('contacts.export.create');
+    Route::post('/contacts/export', [ExportContactcontroller::class, 'store'])->name('contacts.export.store');
     Route::resource('/contacts', ContactController::class);
     Route::delete('/contacts/{contact}/restore', [ContactController::class, 'restore'])->name('contacts.restore')->withTrashed();
     Route::delete('/contacts/{contact}/force-delete', [ContactController::class, 'forceDelete'])->name('contacts.force-delete')->withTrashed();
